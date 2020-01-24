@@ -1,0 +1,22 @@
+# -----[ Application ]---------------------------------------------
+node_modules
+# The actual build files
+build
+# No lock files. They cause confusion. We just don't allow carats in our package
+package-lock.json
+# Remove cache
+.cache
+
+# -----[ Metadata ]---------------------------------------------
+# macOS
+.DS_Store
+# JetBrains (IDE)
+.idea
+# VS Code (IDE)
+.vscode
+npm*log-*
+*.log
+
+# -----[ Local Administrative Items ] --------------------------
+.aws-local.js
+dist.tar

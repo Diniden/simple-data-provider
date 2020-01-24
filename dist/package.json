@@ -1,0 +1,13 @@
+{
+  "author": {
+    "name": "Diniden",
+    "email": "diniden@outlook.com",
+    "url": "http://diniden.com"
+  },
+  "name": "simple-network-data",
+  "version": "1.0.0",
+  "main": "index.js",
+  "types": "src/index.d.ts",
+  "license": "MIT",
+  "dependencies": {}
+}
