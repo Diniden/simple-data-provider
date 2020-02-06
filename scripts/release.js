@@ -4,7 +4,7 @@ const { resolve } = require('path');
 
 const TEST = process.env.TEST;
 const ENSURE_REMOTE = 'origin';
-const ENSURE_REMOTE_PROJECT = 'git@github.com:diniden/simple-data-provider.git';
+const ENSURE_REMOTE_PROJECT = 'git@github.com:Diniden/simple-data-provider.git';
 process.env.NODE_ENV = 'production';
 
 if (TEST) {
