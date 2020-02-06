@@ -186,7 +186,7 @@ describe('Iteration count', () => {
     }
     let i = 0;
 
-    for await (const _ of values(gen())) {
+    for await (const _ of values(gen)) {
       i++;
     }
 
@@ -194,7 +194,7 @@ describe('Iteration count', () => {
 
     i = 0;
 
-    await retrieve(values(gen()), () => {
+    await retrieve(values(gen), () => {
       i++;
     });
 
@@ -210,7 +210,7 @@ describe('Iteration count', () => {
     }
     let i = 0;
 
-    for await (const _ of values(gen())) {
+    for await (const _ of values(gen)) {
       i++;
     }
 
@@ -218,7 +218,7 @@ describe('Iteration count', () => {
 
     i = 0;
 
-    await retrieve(values(gen()), () => {
+    await retrieve(values(gen), () => {
       i++;
     });
 

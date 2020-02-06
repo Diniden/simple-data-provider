@@ -121,11 +121,29 @@ describe('Iterating values', () => {
       }
     }
 
-    for await (const val of values(gen())) {
+    for await (const val of values(gen)) {
       assert(list.indexOf(val) > -1, `Not found in list ${val}`);
     }
 
-    await retrieve(values(gen()), val => {
+    await retrieve(values(gen), val => {
+      assert(list.indexOf(val) > -1, `Not retrieved ${val}`);
+    });
+
+    function* gen2() {
+      let i = 0;
+
+      while (i < list.length) {
+        let next = yield list[i];
+        if (next === void 0) next = i++;
+        i = next;
+      }
+    }
+
+    for await (const val of values(gen2)) {
+      assert(list.indexOf(val) > -1, `Not found in list ${val}`);
+    }
+
+    await retrieve(values(gen2), val => {
       assert(list.indexOf(val) > -1, `Not retrieved ${val}`);
     });
   });
@@ -138,11 +156,30 @@ describe('Iterating values', () => {
       }
     }
 
-    for await (const val of values(gen())) {
+    for await (const val of values(gen)) {
       assert(list.indexOf(val) > -1, `Not found in list ${val}`);
     }
 
-    await retrieve(values(gen()), val => {
+    await retrieve(values(gen), val => {
+      assert(list.indexOf(val) > -1, `Not retrieved ${val}`);
+    });
+
+    async function* gen2() {
+      let i = 0;
+
+      while (i < list.length) {
+        await new Promise(r => setTimeout(r, 15));
+        let next = yield list[i];
+        if (next === void 0) next = i++;
+        i = next;
+      }
+    }
+
+    for await (const val of values(gen2)) {
+      assert(list.indexOf(val) > -1, `Not found in list ${val}`);
+    }
+
+    await retrieve(values(gen2), val => {
       assert(list.indexOf(val) > -1, `Not retrieved ${val}`);
     });
   });

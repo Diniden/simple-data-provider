@@ -116,6 +116,7 @@ export async function* values<T>(
     // If our provider is an iterator, then we just iterate it to completion
     case ProviderType.ITERATOR: {
       const iter = provider as IterableIterator<T>;
+
       if (iter.next) {
         let result = iter.next();
 
@@ -190,11 +191,12 @@ export async function* values<T>(
         // Method is determined to be a generator
         case ProviderType.GENERATOR: {
           const iter = checkValue as Generator<T, void, number>;
-          let result = iter.next();
+          let index = -1;
+          let result = iter.next(++index);
 
           while (!result.done) {
             yield result.value;
-            result = iter.next();
+            result = iter.next(++index);
           }
 
           return void 0;
@@ -203,11 +205,12 @@ export async function* values<T>(
         // Method is determined to be an async generator
         case ProviderType.GENERATOR_ASYNC: {
           const iter = checkValue as AsyncGenerator<T, void, number>;
-          let result = await iter.next();
+          let index = -1;
+          let result = await iter.next(++index);
 
           while (!result.done) {
             yield result.value;
-            result = await iter.next();
+            result = await iter.next(++index);
           }
 
           return void 0;

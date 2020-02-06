@@ -22,17 +22,12 @@ export type IterableProvider<T> = Iterable<T> | AsyncIterable<T> | IterableItera
 /**
  * Provides the values output by the method until an undefined value is returned.
  */
-export type MethodProvider<T> =
-  | ((index: number) => Promise<T | ExitValue> | (T | ExitValue))
-;
+export type MethodProvider<T> = ((index: number) => Promise<T | ExitValue> | (T | ExitValue));
 
 /**
  * Provides the values the generator would provide until the generator completes.
  */
-export type GeneratorProvider<T> =
-  | Generator<T, void, number>
-  | AsyncGenerator<T, void, number>
-;
+export type GeneratorProvider<T> = () => (Generator<T, void, number> | AsyncGenerator<T, void, number>);
 
 /**
  * This depicts a property that is able to provide rows of data. It depicts several strategies for providing that data.
@@ -81,7 +76,8 @@ export type DataProvider<T> =
   | ObjectProvider<T>
   | SetProvider<T>
   | IterableProvider<T>
+  | GeneratorProvider<T>
   | MethodProvider<T>
-  | GeneratorProvider<T>;
+;
 
 export type DataProviderPage<T> = T[];
