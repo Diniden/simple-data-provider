@@ -1,13 +1,19 @@
-# Data Provider (WIP)
+# Simple Data Provider
 
-Library to help make a uniform interface for synchornous and asynchronous data piping.
+Library to help make a uniform interface for synchronous and asynchronous data piping.
 
-## Developing and Viewing Demos
+## Developing
+
+This project is a simple method library. So it's more appropriate to develop using the unit-tests rather than a browser
+
+```sh
+npm run unit-test-dev
+```
+
+If you wish to test the bundling procedure and execute the methods in a browser, simply use:
 
 ```sh
 npm run dev
 ```
 
-## WIP
-
-Note this library is under development to get to first distribution. It is NOT a working product yet.
+Then follow the instructions in the browser after opening the webpage.

@@ -4,7 +4,7 @@ const { resolve } = require('path');
 
 const TEST = process.env.TEST;
 const ENSURE_REMOTE = 'origin';
-const ENSURE_REMOTE_PROJECT = 'git@github.com:vega-studio/deltav.git';
+const ENSURE_REMOTE_PROJECT = 'git@github.com:Diniden/simple-data-provider.git';
 process.env.NODE_ENV = 'production';
 
 if (TEST) {
@@ -81,6 +81,14 @@ if (sh('node', 'scripts/build').code !== 0) {
 // Clean out the compiled test file typings
 try {
   removeSync(resolve('dist/test'));
+}
+catch (err) {
+  console.log('Failed to clean distribution');
+  process.exit(1);
+}
+
+try {
+  removeSync(resolve('dist/unit-test'));
 }
 catch (err) {
   console.log('Failed to clean distribution');
