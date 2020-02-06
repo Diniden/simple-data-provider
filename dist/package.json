@@ -4,7 +4,7 @@
     "email": "diniden@outlook.com",
     "url": "http://diniden.com"
   },
-  "name": "simple-network-data",
+  "name": "simple-data-provider",
   "version": "1.0.0",
   "main": "index.js",
   "types": "src/index.d.ts",

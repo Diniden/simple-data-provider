@@ -7,7 +7,6 @@ import {
 import {
   DataProvider,
   ExitValue,
-  GeneratorProvider,
   IterableProvider,
   MethodProvider,
   ObjectProvider,
@@ -124,9 +123,7 @@ export async function* values<T>(
           yield result.value;
           result = iter.next();
         }
-      }
-
-      else {
+      } else {
         for (const result of iter) {
           yield result;
         }

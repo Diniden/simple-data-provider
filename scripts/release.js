@@ -88,6 +88,14 @@ catch (err) {
 }
 
 try {
+  removeSync(resolve('dist/unit-test'));
+}
+catch (err) {
+  console.log('Failed to clean distribution');
+  process.exit(1);
+}
+
+try {
   copySync(resolve('docs'), resolve('dist/docs'));
 }
 catch (err) {
