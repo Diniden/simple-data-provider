@@ -2,6 +2,10 @@
 
 Library to help make a uniform interface for synchronous and asynchronous data piping.
 
+## Docs
+
+[Documentation](./docs/intro.md)
+
 ## Developing
 
 This project is a simple method library. So it's more appropriate to develop using the unit-tests rather than a browser
