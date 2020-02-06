@@ -1,6 +1,6 @@
 # Data Provider (WIP)
 
-Library to help make a uniform interface for synchornous and asynchronous data piping.
+Library to help make a uniform interface for synchronous and asynchronous data piping.
 
 ## Developing and Viewing Demos
 

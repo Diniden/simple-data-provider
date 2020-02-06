@@ -22,11 +22,13 @@
     "removeComments": false,
     "strictNullChecks": true,
     "target": "es5",
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types"],
+    "downlevelIteration": true,
   },
   "include": [
     "src",
-    "test"
+    "test",
+    "unit-test"
   ],
   "exclude": [
     "node_modules",

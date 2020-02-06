@@ -13,6 +13,8 @@ module.exports = {
     "default-case": [0],
     "quotes": [0],
     "valid-jsdoc": [0],
-    "curly": [0]
+    "curly": [0],
+    "no-cond-assign": [0],
+    "space-before-function-paren": [0]
   },
 };
