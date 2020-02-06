@@ -33,7 +33,7 @@
     "@types/dat.gui": "0.7.2",
     "@types/debug": "4.1.4",
     "@types/mocha": "5.2.7",
-    "@types/node": "8.0.58",
+    "@types/node": "13.7.0",
     "animejs": "2.2.0",
     "assert": "2.0.0",
     "auto": "github:tarwich/auto",
