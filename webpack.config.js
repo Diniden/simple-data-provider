@@ -48,6 +48,7 @@ const plugins = [];
 let externals = [];
 let library;
 let libraryTarget;
+let globalObject;
 
 if (IS_DEVELOPMENT) {
   plugins.push(
@@ -68,6 +69,7 @@ if (IS_PRODUCTION) {
   // We are bundling a library so set the output targets correctly
   library = 'simple-data-provider';
   libraryTarget = 'umd';
+  globalObject = 'typeof self !== \'undefined\' ? self : this';
 
   // We should minify and mangle our distribution for npm
   console.log('Minification enabled');
@@ -115,6 +117,7 @@ module.exports = {
   output: {
     library,
     libraryTarget,
+    globalObject,
     path,
     filename: 'index.js'
   },
