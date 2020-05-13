@@ -17,6 +17,7 @@ npm*log-*
 # -----[ Distribution ] -------------------------------------------
 # scripts
 scripts
+assets
 # Remove any development Code
 src
 docs
