@@ -190,7 +190,7 @@ export async function* values<T>(
       switch (state.type) {
         // Method is determined to be a generator
         case ProviderType.GENERATOR: {
-          const iter = checkValue as Generator<T, void, number>;
+          const iter = checkValue as Generator<T, T | void, number>;
           let index = -1;
           let result = iter.next(++index);
 
@@ -204,7 +204,7 @@ export async function* values<T>(
 
         // Method is determined to be an async generator
         case ProviderType.GENERATOR_ASYNC: {
-          const iter = checkValue as AsyncGenerator<T, void, number>;
+          const iter = checkValue as AsyncGenerator<T, T | void, number>;
           let index = -1;
           let result = await iter.next(++index);
 
