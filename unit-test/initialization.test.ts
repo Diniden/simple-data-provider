@@ -1,7 +1,7 @@
 import assert from "assert";
 import { describe, it } from "mocha";
-import { values } from "../src";
-import { isAsyncIterable } from "../src/internal-types";
+import { values } from "../lib";
+import { isAsyncIterable } from "../lib/internal-types";
 
 describe("Initializing Generator", () => {
   it("List should be a generator", async () => {

@@ -2,7 +2,7 @@ const { removeSync, ensureDirSync, existsSync, writeJSONSync, readJSONSync } = r
 const path = require('path');
 const shell = require('shelljs');
 
-const releaseClient = require('../lib/web-app/release-client');
+const releaseLibrary = require('../lib/web-app/release-library');
 const targetProjectRepo = require('../lib/target-project/target-project-repo');
 const targetProjectVersion = require('../lib/target-project/target-project-version');
 const wait = require('../lib/util/wait');
@@ -155,24 +155,7 @@ async function bundleProject(bundleMode) {
       break;
   }
 
-  /**
-   * NOTES: This project does not require server or library releases. We are
-   * only releasing multiple clients. One client for multiple environment
-   * builds.
-   */
-
-  const buildEnvironments = require(path.resolve("build.conf.js"));
-  console.log("Building environments", colors.bold.red(JSON.stringify(buildEnvironments)));
-
-  if (!Array.isArray(buildEnvironments)) {
-    console.error("build.conf.js must be an array of string values");
-    process.exit(1);
-  }
-
-  for (const env of buildEnvironments) {
-    console.log("Generating bundle for", colors.bold.yellow(JSON.stringify(env)));
-    await releaseClient(env);
-  }
+  await releaseLibrary();
 }
 
 /**

@@ -18,6 +18,7 @@ npm*log-*
 # scripts
 scripts
 assets
+bin
 # Remove any development Code
 src
 docs

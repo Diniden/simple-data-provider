@@ -14,8 +14,7 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "paths": {
-      "src": ["./src"],
-      "test": ["./test"]
+      "src": ["./lib"]
     },
     "sourceMap": true,
     "noUnusedParameters": true,
@@ -26,8 +25,7 @@
     "downlevelIteration": true,
   },
   "include": [
-    "src",
-    "test",
+    "lib",
     "unit-test"
   ],
   "exclude": [

@@ -1,6 +1,6 @@
 import assert from "assert";
 import { describe, it } from "mocha";
-import { retrieve, values } from "../src";
+import { retrieve, values } from "../lib";
 
 const list = [-1, 0, 1, 2, 3];
 
