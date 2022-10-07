@@ -22,7 +22,7 @@
     "strictNullChecks": true,
     "target": "es5",
     "typeRoots": ["./node_modules/@types"],
-    "downlevelIteration": true,
+    "downlevelIteration": true
   },
   "include": [
     "lib",

@@ -9,16 +9,16 @@ const wait = require('../lib/util/wait');
  * run this as nodemon process to find errors as development happens.
  */
 async function runTypescript() {
-  if (!existsSync(path.resolve('app'))) {
+  if (!existsSync(path.resolve('lib'))) {
     console.warn('Skipping ts declaration file generation as no app source code is present');
     return;
   }
 
   // Build declaration files for the library only
   const tsConfig = readJSONSync(path.resolve('tsconfig.json'));
-  tsConfig.include = ["app", "dts"];
+  tsConfig.include = ["lib", "dts"];
   tsConfig.exclude = tsConfig.exclude || [];
-  tsConfig.exclude.push("app/server");
+  // tsConfig.exclude.push("lib/server");
   writeJSONSync(path.resolve('tsconfig.temp.json'), tsConfig);
   // Ensure the file system has flushed the temp file to disk
   await wait(500);
@@ -33,7 +33,7 @@ async function runTypescript() {
     process.exit(1);
   }
 
-  if (shell.exec(`tslint '${path.resolve("app/**/*.ts")}?(x)'`).code !== 0) {
+  if (shell.exec(`tslint '${path.resolve("lib/**/*.ts")}?(x)'`).code !== 0) {
     console.log('Failed tslint checks.');
     removeSync(path.resolve('tsconfig.temp.json'));
     process.exit(1);
