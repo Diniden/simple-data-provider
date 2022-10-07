@@ -20,8 +20,6 @@ const tslint = {
   }
 };
 
-const { ENV } = require(`./app/client/env${process.env.BUILD_ENV ? `.${process.env.BUILD_ENV}` : ''}`);
-
 const prettier = {
   loader: resolve(process.env.PRETTIERJSPATH || '', 'prettier-loader.js'),
 };
@@ -126,23 +124,6 @@ const config: Webpack.Configuration = {
       {
         test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
         use: 'base64-inline-loader'
-      },
-      // This configuration will allow for ENV property picking within the HTML
-      // file. Simply use template syntax with ${property name} to reference the
-      // property in the HTML. This will NOT work for methods on the ENV nor
-      // will it reference nested properties (prop.prop will not work, only prop
-      // will work).
-      {
-        test: /index\.html$/,
-        loader: 'string-replace-loader',
-        options: {
-          search: /\$\{([^\}]*)\}/g,
-          replace: (match, p1) => {
-            const value = ENV[p1];
-            if (value !== void 0) return value;
-            return match;
-          }
-        }
       },
       {
         test: /\.(mp4|mov)$/,
