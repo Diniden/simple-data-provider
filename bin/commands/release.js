@@ -2,7 +2,7 @@ const { removeSync, ensureDirSync, existsSync, writeJSONSync, readJSONSync } = r
 const path = require('path');
 const shell = require('shelljs');
 
-const releaseLibrary = require('../lib/web-app/release-library');
+const releaseLibrary = require('../lib/library/release-library');
 const targetProjectRepo = require('../lib/target-project/target-project-repo');
 const targetProjectVersion = require('../lib/target-project/target-project-version');
 const wait = require('../lib/util/wait');

@@ -136,7 +136,7 @@ program
     require('./commands/ts')()
       // Do the full release cycle
       .then(() => require('./commands/release')('bundle', alternate, getOptions()))
-      .catch(() => console.warn('Release process exited unexpectedly'));
+      .catch((err) => console.warn('Release process exited unexpectedly\n', err.stack || err.message));
   })
   ;
 
