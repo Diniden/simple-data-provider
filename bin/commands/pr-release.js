@@ -147,7 +147,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
   let browser = await puppeteer.launch({
     // If showLogIn, then we must present the browser so the user can enter
     // their credentials.
-    headless: false,
+    headless: !showLogIn,
     userDataDir: path.resolve(__dirname, "../../node_modules/.cache/pr-ticket"),
     defaultViewport: null
   });
@@ -209,8 +209,16 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
 
   // Log in validated, close the log in page
   else {
+    browser.close();
     page.close();
   }
+
+  // Reopen the browser but ensure we're not headless anymore
+  browser = await puppeteer.launch({
+    headless: false,
+    userDataDir: path.resolve(__dirname, "../../node_modules/.cache/pr-ticket"),
+    defaultViewport: null
+  });
 
   const makePR = async (source, target) => {
     const page = await browser.newPage();
@@ -228,7 +236,8 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
 
     // Wait for the elements to be available to manipulate
     await page.waitForFunction(() => {
-      const node = document.querySelector('#repo-content-pjax-container > div > div.js-details-container.Details.js-compare-pr > div > button').click();
+      const node = document.querySelector('#repo-content-pjax-container > div > div.js-details-container.Details.js-compare-pr > div > button');
+      node?.click();
       return node !== null && node !== void 0;
     });
 
