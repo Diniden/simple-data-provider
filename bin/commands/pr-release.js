@@ -182,6 +182,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
   // data-project-id="722"
   console.warn("Checking for logged-in attribute on body...")
   const loggedIn = await page.evaluate(() => {
+    console.log("logged-in check:", document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in")));
     return document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in"));
   });
 
