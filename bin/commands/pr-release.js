@@ -263,7 +263,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogin) {
  */
 async function run(repoUrl, repoType) {
   // Validate we have implemented a strategy for a given repo type.
-  const validRepos = new Set(["gitlab"]);
+  const validRepos = new Set(["gitlab", "git", "github"]);
 
   if (!validRepos.has(repoType)) {
     console.error(`Unsupported repo type: ${repoType}`);
