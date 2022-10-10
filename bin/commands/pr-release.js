@@ -170,7 +170,6 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
       return projectId !== null && projectId !== void 0;
     }, { timeout: 0 });
 
-    await page.close();
     shouldExit = false;
   }
 
@@ -200,6 +199,11 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
     await browser.close();
     openGitPR(repoUrl, releaseVersion, true);
     return;
+  }
+
+  // Log in validated, close the log in page
+  else {
+    page.close();
   }
 
   const makePR = async (source, target, includeUtf) => {
