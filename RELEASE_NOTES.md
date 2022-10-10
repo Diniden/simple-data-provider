@@ -1,3 +1,9 @@
+## 1.1.5
+
+## Fixed
+
+- [`FIXED`]: Updated README to be a bit more relevant
+
 ## 1.1.4
 
 ## Fixed
