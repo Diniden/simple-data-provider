@@ -225,7 +225,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
     await page.waitForFunction(() => {
       const node = document.querySelector('#repo-content-pjax-container > div > div.js-details-container.Details.js-compare-pr > div > button').click();
       return node !== null && node !== void 0;
-    }, { timeout: 0 });
+    });
 
     // Click the create PR button to open next dialog
     // await page.evaluate(async () => {
