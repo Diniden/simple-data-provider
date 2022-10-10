@@ -164,7 +164,9 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
       process.exit(1);
     });
 
-    await page.goto("https://github.com/login");
+    const loginUrl = "https://github.com/login";
+    console.warn("Opening github login page: ", loginUrl)
+    await page.goto(loginUrl);
     await page.waitForFunction(() => {
       const projectId = document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in"));
       return projectId !== null && projectId !== void 0;
@@ -185,6 +187,8 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
     console.log("logged-in check:", document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in")));
     return document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in"));
   });
+
+  console.warn("Loggin in check:", loggedIn);
 
   // IF we attempted a login AND there is no project ID available, then we are
   // unable to determine the project ID.
