@@ -14,8 +14,7 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "paths": {
-      "src": ["./src"],
-      "test": ["./test"]
+      "src": ["./lib"]
     },
     "sourceMap": true,
     "noUnusedParameters": true,
@@ -23,11 +22,10 @@
     "strictNullChecks": true,
     "target": "es5",
     "typeRoots": ["./node_modules/@types"],
-    "downlevelIteration": true,
+    "downlevelIteration": true
   },
   "include": [
-    "src",
-    "test",
+    "lib",
     "unit-test"
   ],
   "exclude": [
