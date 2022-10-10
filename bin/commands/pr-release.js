@@ -147,7 +147,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
   let browser = await puppeteer.launch({
     // If showLogIn, then we must present the browser so the user can enter
     // their credentials.
-    headless: !showLogIn,
+    headless: false,
     userDataDir: path.resolve(__dirname, "../../node_modules/.cache/pr-ticket"),
     defaultViewport: null
   });
@@ -174,7 +174,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
   }
 
   else {
-    console.warn("Opening project url...");
+    console.warn("Opening project url: ", repoUrl);
     await page.goto(repoUrl);
   }
 
