@@ -227,9 +227,9 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
     }, { timeout: 0 });
 
     // Click the create PR button to open next dialog
-    await page.evaluate(async () => {
-      document.querySelector('#repo-content-pjax-container > div > div.js-details-container.Details.js-compare-pr > div > button').click();
-    });
+    // await page.evaluate(async () => {
+    //   document.querySelector('#repo-content-pjax-container > div > div.js-details-container.Details.js-compare-pr > div > button').click();
+    // });
 
     // Populate the elements with expected configuration
     await page.evaluate(async (releaseVersion) => {
@@ -241,7 +241,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
     await new Promise(r => {
       page.on('close', () => {
         r();
-        console.warn("Gitlab ticket process finished\n\n");
+        console.warn("Github ticket process finished\n\n");
       });
     })
   }
