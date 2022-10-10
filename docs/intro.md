@@ -43,6 +43,11 @@ const t8 = values(generator());
 for await (const val of values(...)) {
   // Do something
 }
+
+// or
+retrieve(values(...), val => {
+
+})
 ```
 
 ### retrieve(asyncGenerator, callback)
