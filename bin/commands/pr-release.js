@@ -143,7 +143,7 @@ async function openGitlabPR(repoUrl, releaseVersion, showLogIn) {
   browser.close();
 }
 
-async function openGitPR(repoUrl, releaseVersion, showLogin) {
+async function openGitPR(repoUrl, releaseVersion, showLogIn) {
   let browser = await puppeteer.launch({
     // If showLogIn, then we must present the browser so the user can enter
     // their credentials.
