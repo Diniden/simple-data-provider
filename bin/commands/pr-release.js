@@ -207,10 +207,9 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
     return;
   }
 
-  // Log in validated, close the log in page
+  // Log in validated, close the log in browser as it may be in headless mode
   else {
     browser.close();
-    page.close();
   }
 
   // Reopen the browser but ensure we're not headless anymore
