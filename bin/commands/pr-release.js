@@ -52,6 +52,7 @@ async function openGitlabPR(repoUrl, releaseVersion, showLogIn) {
     }, { timeout: 0 });
 
     shouldExit = false;
+    await page.close();
   }
 
   else {
@@ -142,6 +143,116 @@ async function openGitlabPR(repoUrl, releaseVersion, showLogIn) {
   browser.close();
 }
 
+async function openGitPR(repoUrl, releaseVersion, showLogin) {
+  let browser = await puppeteer.launch({
+    // If showLogIn, then we must present the browser so the user can enter
+    // their credentials.
+    headless: !showLogIn,
+    userDataDir: path.resolve(__dirname, "../../node_modules/.cache/pr-ticket"),
+    defaultViewport: null
+  });
+
+  let page = await browser.newPage();
+
+  if (showLogIn) {
+    console.warn("User login required...");
+    let shouldExit = true;
+
+    browser.on('disconnected', () => {
+      if (!shouldExit) return;
+      console.warn("Browser was closed or crashed. Try the command again.");
+      process.exit(1);
+    });
+
+    await page.goto("https://github.com/login");
+    await page.waitForFunction(() => {
+      const projectId = document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in"));
+      return projectId !== null && projectId !== void 0;
+    }, { timeout: 0 });
+
+    await page.close();
+    shouldExit = false;
+  }
+
+  else {
+    console.warn("Opening project url...");
+    await page.goto(repoUrl);
+  }
+
+  // The project ID is located on the body within attribute
+  // data-project-id="722"
+  const loggedIn = await page.evaluate(() => {
+    return document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in"));
+  });
+
+  // IF we attempted a login AND there is no project ID available, then we are
+  // unable to determine the project ID.
+  if (!loggedIn && showLogIn) {
+    await browser.close();
+    console.error("Failed to log in the user for github.");
+    process.exit(1);
+  }
+
+  // If we could not get a project ID, present a non-headless browser to allow
+  // the user to login.
+  else if (!loggedIn) {
+    console.warn("Logged-in not found on body, login might be needed...");
+    await browser.close();
+    openGitPR(repoUrl, releaseVersion, true);
+    return;
+  }
+
+  const makePR = async (source, target, includeUtf) => {
+    const page = await browser.newPage();
+
+    // https://github.com/Diniden/simple-data-provider/compare/master...release
+    // Use the proper URL structure to generate the page with the correct merge request
+    await page.goto(`${
+        repoUrl
+      }/compare/${
+        target
+      }...${
+        source
+      }`
+    );
+
+    // Wait for the elements to be available to manipulate
+    await page.waitForFunction(() => {
+      const node = document.querySelector('#repo-content-pjax-container > div > div.js-details-container.Details.js-compare-pr > div > button').click();
+      return node !== null && node !== void 0;
+    }, { timeout: 0 });
+
+    // Click the create PR button to open next dialog
+    await page.evaluate(async () => {
+      document.querySelector('#repo-content-pjax-container > div > div.js-details-container.Details.js-compare-pr > div > button').click();
+    });
+
+    // Populate the elements with expected configuration
+    await page.evaluate(async (releaseVersion) => {
+      document.querySelector('[name="pull_request[title]"]').value = `Release ${releaseVersion}`;
+      document.querySelector('[name="pull_request[body]"]').value = `Release ${releaseVersion}`;
+    }, releaseVersion);
+
+    // Wait for the page to close
+    await new Promise(r => {
+      page.on('close', () => {
+        r();
+        console.warn("Gitlab ticket process finished\n\n");
+      });
+    })
+  }
+
+  // Wait for both PRs to come to completion
+  console.warn("\n\nWaiting for browser windows to be closed...\n\n");
+  await Promise.all([
+    makePR("release", "dev"),
+    makePR("release", "master"),
+  ]);
+
+  // Close after all pages closed
+  browser.close();
+}
+
 /**
  * This command is intended to work with the current branch IF the branch has
  * been created using the "npm run ticket" command.
@@ -180,6 +291,11 @@ async function run(repoUrl, repoType) {
   switch (repoType) {
     case "gitlab":
       await openGitlabPR(repoUrl, version);
+      break;
+
+    case "git":
+    case "github":
+      await openGitPR(repoUrl, version);
       break;
 
     default:

@@ -23,7 +23,8 @@
     "dev-link": "ts-node --transpile-only bin/main dev-link",
     "unit-test": "ts-node --transpile-only bin/main unit-test",
     "unit-test-dev": "ts-node --transpile-only bin/main unit-test-dev",
-    "unit-test-debug": "ts-node --transpile-only bin/main unit-test-debug"
+    "unit-test-debug": "ts-node --transpile-only bin/main unit-test-debug",
+    "pr-release": "ts-node --transpile-only bin/main pr-release \"https://github.com/Diniden/simple-data-provider\" git"
   },
   "dependencies": {},
   "devDependencies": {
