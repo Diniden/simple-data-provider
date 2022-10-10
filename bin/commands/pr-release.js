@@ -180,6 +180,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
 
   // The project ID is located on the body within attribute
   // data-project-id="722"
+  console.warn("Checking for logged-in attribute on body...")
   const loggedIn = await page.evaluate(() => {
     return document?.body?.getAttribute("class").split(" ").find(c => c.startsWith("logged-in"));
   });
@@ -206,7 +207,7 @@ async function openGitPR(repoUrl, releaseVersion, showLogIn) {
     page.close();
   }
 
-  const makePR = async (source, target, includeUtf) => {
+  const makePR = async (source, target) => {
     const page = await browser.newPage();
 
     // https://github.com/Diniden/simple-data-provider/compare/master...release
