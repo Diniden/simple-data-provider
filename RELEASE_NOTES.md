@@ -1,3 +1,9 @@
+## 1.1.6
+
+## Fixed
+
+- [`FIXED`]: Repaired distribution bundle
+
 ## 1.1.5
 
 ## Fixed

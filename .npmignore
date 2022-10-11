@@ -24,6 +24,7 @@ src
 docs
 loaders
 # Ensure distribution sources are included
+!dist/lib
 !dist/src
 !dist/docs
 # Remove any tests
@@ -33,6 +34,7 @@ unit-test
 tsconfig.json
 tslint.json
 webpack.config.js
+webpack.config.ts
 wercker.yml
 yarn.lock
 dts-bundle.tmp.voidgl.d.ts
@@ -46,3 +48,4 @@ app.json
 .prettierignore
 .eslintignore
 .aws-local.js
+RELEASE_NOTES.md
