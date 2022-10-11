@@ -20,3 +20,4 @@ npm*log-*
 # -----[ Local Administrative Items ] --------------------------
 .aws-local.js
 dist.tar
+tsconfig.temp.json
